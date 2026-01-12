@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zorionak Ainhoa! 🧡</title>
+    <title>Para Ainhoa 🧡</title>
+    <!-- Mismas fuentes para mantener consistencia -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,400;1,600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -19,143 +20,215 @@
             background-color: var(--soft-bg);
             color: var(--text-dark);
             display: flex; justify-content: center; align-items: center;
-            min-height: 100vh;
+            height: 100vh; overflow: hidden;
         }
 
-        .container {
-            max-width: 600px; width: 90%; padding: 40px;
-            background: white; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            text-align: center; border: 1px solid #f2e9e1;
-            margin: 20px; position: relative;
+        .landing-card {
+            text-align: center;
+            max-width: 450px;
+            width: 85%;
+            padding: 50px 30px;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(214, 128, 96, 0.1);
+            border: 1px solid #f2e9e1;
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        .header-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--primary-love); margin-bottom: 10px; }
-        .divider { height: 2px; width: 50px; background-color: var(--accent-orange); margin: 20px auto; }
-        
-        .city-image { width: 100%; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .invitation-text { font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px; }
-
-        .details-box {
-            background-color: #fffaf5; padding: 25px; border-radius: 15px;
-            border-left: 5px solid var(--accent-orange); text-align: left;
-            display: inline-block; margin-bottom: 30px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- CARROUSEL AJUSTADO A FONDO BLANCO --- */
-        .gallery-container {
-            position: relative; 
-            width: 100%; 
-            overflow: hidden;
-            border-radius: 15px; 
-            margin-top: 20px;
-            background-color: #ffffff; /* Fondo blanco */
-            border: 1px solid #eee; /* Borde sutil para delimitar la zona */
+        .heart-icon {
+            font-size: 3rem;
+            color: var(--primary-love);
+            margin-bottom: 20px;
+            display: block;
+            animation: pulse 2s infinite;
         }
 
-        .gallery-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
-        
-        .gallery-item { 
-            min-width: 100%; 
-            height: 600px; 
-            object-fit: contain; 
-            background-color: #ffffff; /* Fondo de la imagen blanco */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
-        .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.9); /* Un poco más opaco para que se vea sobre el blanco */
-            border: 1px solid #ddd; 
-            padding: 12px;
-            cursor: pointer; border-radius: 50%; color: var(--primary-love);
-            z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-love);
+            margin: 0 0 15px 0;
         }
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
 
-        .footer-note { margin-top: 40px; font-style: italic; font-size: 0.9rem; color: #aaa; }
+        p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 35px;
+            color: #777;
+        }
+
+        .enter-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background-color: var(--primary-love);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(214, 128, 96, 0.2);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .enter-btn:hover {
+            background-color: var(--accent-orange);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(214, 128, 96, 0.3);
+        }
+
+        /* Decoración de esquinas similar a una carta */
+        .corner {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* Contenedor principal para centrar el regalo */
+        .gift-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 50px auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        /* Animación de movimiento al pasar el ratón */
+        .gift-container:hover {
+            animation: shake 0.5s infinite;
+        }
+
+        /* El cuerpo de la caja */
+        .gift-box {
+            width: 100%;
+            height: 100%;
+            background: #d68060; /* El color naranja de tu paleta */
+            border-radius: 10px;
+            position: relative;
+        }
+
+        /* La cinta vertical del regalo */
+        .gift-box::before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 100%;
+            background: #ff9a76; /* Color de acento */
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* La tapa del regalo */
+        .gift-lid {
+            position: absolute;
+            width: 110%;
+            height: 35px;
+            background: #d68060;
+            top: -10px;
+            left: -5%;
+            border-radius: 5px;
+            z-index: 2;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* El lazo superior (emoji) */
+        .gift-bow {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            z-index: 3;
+        }
+
+        /* Texto de instrucción */
+        .tap-text {
+            margin-top: 25px;
+            font-family: 'Playfair Display', serif;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        /* Definición de la animación de temblor */
+        @keyframes shake {
+            0% { transform: rotate(0); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(0); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0); }
+        }
+
     </style>
 </head>
+<!-- SUSTITUYE TU BLOQUE <body> POR ESTE -->
 <body>
 
-    <div class="container">
-        <h1 class="header-title">Zorionak Ainhoa! 🧡</h1>
-        <div class="divider"></div>
+    <div class="landing-card">
+        <h1>Hola, Ainhoa</h1>
+        <p>Pulsa el regalo para ver tu regalito...</p>
         
-        <img src="https://static.holidu.com/region/8641/l/7146.jpg" alt="Toledo" class="city-image">
-
-        <div class="invitation-text">
-            No hay mejor forma de celebrar tu cumple que perdiéndonos entre las calles de <strong>Toledo</strong>. 
-            Te quiero mucho y estoy muy orgulloso de ti.
+        <!-- Eliminamos el href directo para controlarlo con JS y hacer la animación -->
+        <div class="gift-container" onclick="abrirRegalo()">
+            <div class="gift-bow" id="bow">🎀</div>
+            <div class="gift-lid" id="lid"></div>
+            <div class="gift-box"></div>
+            <!-- Capa de confeti interna -->
+            <div id="confetti-container"></div>
         </div>
-
-        <div class="details-box">
-            <div><strong>Cuándo:</strong> 16 de enero de 2026</div>
-            <div><strong>Hora:</strong> 14:00 h</div>
-            <div><strong>Punto de encuentro:</strong> Escuela Nacional de Medicina</div>
-        </div>
-
-        <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-love);">Algunas fotos nuestras random:</h3>
-        
-        <div class="gallery-container">
-            <div class="gallery-wrapper" id="gallery-wrapper">
-                <img src="fotos/foto (1).jpg" class="gallery-item">
-                <img src="fotos/foto (2).jpg" class="gallery-item">
-                <img src="fotos/foto (3).jpg" class="gallery-item">
-                <img src="fotos/foto (4).jpg" class="gallery-item">
-                <img src="fotos/foto (5).jpg" class="gallery-item">
-                <img src="fotos/foto (6).jpg" class="gallery-item">
-                <img src="fotos/foto (7).jpg" class="gallery-item">
-                <img src="fotos/foto (8).jpg" class="gallery-item">
-                <img src="fotos/foto (9).jpg" class="gallery-item">
-                <img src="fotos/foto (10).jpg" class="gallery-item">
-                <img src="fotos/foto (11).jpg" class="gallery-item">
-                <img src="fotos/foto (12).jpg" class="gallery-item">
-                <img src="fotos/foto (13).jpg" class="gallery-item">
-                <img src="fotos/foto (14).jpg" class="gallery-item">
-                <img src="fotos/foto (15).jpg" class="gallery-item">
-                <img src="fotos/foto (16).jpg" class="gallery-item">
-                <img src="fotos/foto (17).jpg" class="gallery-item">
-                <img src="fotos/foto (18).jpg" class="gallery-item">
-                <img src="fotos/foto (19).jpg" class="gallery-item">
-                <img src="fotos/foto (20).jpg" class="gallery-item">
-                <img src="fotos/foto (21).jpg" class="gallery-item">
-                <img src="fotos/foto (22).jpg" class="gallery-item">
-                <img src="fotos/foto (23).jpg" class="gallery-item">
-                <img src="fotos/foto (24).jpg" class="gallery-item">
-                <img src="fotos/foto (25).jpg" class="gallery-item">
-                <img src="fotos/foto (26).jpg" class="gallery-item">
-                <img src="fotos/foto (27).jpg" class="gallery-item">
-                <img src="fotos/foto (28).jpg" class="gallery-item">
-                <img src="fotos/foto (29).jpg" class="gallery-item">
-                <img src="fotos/foto (30).jpg" class="gallery-item">
-                <img src="fotos/foto (31).jpg" class="gallery-item">
-                <img src="fotos/foto (32).jpg" class="gallery-item">
-                <img src="fotos/foto (33).jpg" class="gallery-item">
-                <img src="fotos/foto (34).jpg" class="gallery-item">
-                <img src="fotos/foto (35).jpg" class="gallery-item">
-                <img src="fotos/foto (36).jpg" class="gallery-item">
-                <img src="fotos/foto (37).jpg" class="gallery-item">
-            </div>
-            
-            <button class="nav-btn prev-btn" onclick="moveSlide(-1)">❮</button>
-            <button class="nav-btn next-btn" onclick="moveSlide(1)">❯</button>
-        </div>
-
-        <p class="footer-note">Por muchos más cumples y recuerdos juntos.</p>
+        <p class="tap-text" id="status-text">¿Qué será?</p>
     </div>
 
     <script>
-        let currentSlide = 0;
-        function moveSlide(direction) {
-            const wrapper = document.getElementById('gallery-wrapper');
-            const items = document.querySelectorAll('.gallery-item');
-            if (items.length === 0) return;
-            currentSlide = (currentSlide + direction + items.length) % items.length;
-            wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+        function abrirRegalo() {
+            const lid = document.getElementById('lid');
+            const bow = document.getElementById('bow');
+            const text = document.getElementById('status-text');
+            
+            // 1. Animación de la tapa volando
+            lid.style.transition = "all 0.5s ease-out";
+            lid.style.transform = "translateY(-100px) rotate(-15deg)";
+            lid.style.opacity = "0";
+            
+            bow.style.transition = "all 0.5s ease-out";
+            bow.style.transform = "translate(-50%, -120px) rotate(20deg)";
+            bow.style.opacity = "0";
+
+            // 2. Cambio de texto
+            text.innerText = "¡Sorpresa! ✨";
+            text.style.color = "var(--primary-love)";
+
+            // 3. Redirección tras la animación (600ms)
+            setTimeout(() => {
+                window.location.href = "about.html";
+            }, 600);
         }
-        setInterval(() => moveSlide(1), 5000); 
     </script>
+
+    <style>
+        /* AÑADE ESTO A TU <style> EXISTENTE */
+        .gift-container:active {
+            transform: scale(0.9); /* Efecto de pulsado */
+        }
+        
+        /* Aseguramos que el texto de abajo no sea un link azul */
+        .gift-link { text-decoration: none; color: inherit; }
+    </style>
 </body>
+
 </html>
