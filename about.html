@@ -22,6 +22,16 @@
             min-height: 100vh;
         }
 
+         #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
         .container {
             max-width: 600px; width: 90%; padding: 40px;
             background: white; border-radius: 20px;
@@ -42,15 +52,14 @@
             display: inline-block; margin-bottom: 30px;
         }
 
-        /* --- CARROUSEL AJUSTADO A FONDO BLANCO --- */
         .gallery-container {
             position: relative; 
             width: 100%; 
             overflow: hidden;
             border-radius: 15px; 
             margin-top: 20px;
-            background-color: #ffffff; /* Fondo blanco */
-            border: 1px solid #eee; /* Borde sutil para delimitar la zona */
+            background-color: #ffffff;
+            border: 1px solid #eee;
         }
 
         .gallery-wrapper { display: flex; transition: transform 0.5s ease-in-out; }
@@ -59,12 +68,12 @@
             min-width: 100%; 
             height: 600px; 
             object-fit: contain; 
-            background-color: #ffffff; /* Fondo de la imagen blanco */
+            background-color: #ffffff;
         }
 
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background: rgba(255,255,255,0.9); /* Un poco más opaco para que se vea sobre el blanco */
+            background: rgba(255,255,255,0.9);
             border: 1px solid #ddd; 
             padding: 12px;
             cursor: pointer; border-radius: 50%; color: var(--primary-love);
@@ -78,6 +87,8 @@
     </style>
 </head>
 <body>
+    <!-- 1. SE AÑADE EL CANVAS PARA DIBUJAR EL CONFETI -->
+    <canvas id="confetti-canvas"></canvas>
 
     <div class="container">
         <h1 class="header-title">Zorionak Ainhoa! 🧡</h1>
@@ -156,6 +167,62 @@
             wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
         setInterval(() => moveSlide(1), 5000); 
+
+        // 2. SCRIPT DE CONFETI CORREGIDO Y COMPLETADO
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const colors = ['#d68060', '#ff9a76', '#ffc1a1', '#f2e9e1', '#4a4a4a'];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: -20,
+                size: Math.random() * 7 + 3,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                velocity: { x: (Math.random() - 0.5) * 3, y: Math.random() * 3 + 2 },
+                rotation: Math.random() * 360,
+                rotationSpeed: Math.random() * 10 - 5
+            };
+        }
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => {
+                p.x += p.velocity.x;
+                p.y += p.velocity.y;
+                p.rotation += p.rotationSpeed;
+                
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate(p.rotation * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                ctx.restore();
+            });
+            
+            // Eliminar partículas fuera de pantalla para ahorrar memoria
+            particles = particles.filter(p => p.y < canvas.height);
+            
+            if (particles.length > 0) {
+                requestAnimationFrame(update);
+            }
+        }
+
+        // Inicialización
+        window.addEventListener('resize', resize);
+        resize();
+        
+        // Crear 100 partículas al inicio
+        for (let i = 0; i < 100; i++) {
+            particles.push(createParticle());
+        }
+        update();
     </script>
 </body>
 </html>
